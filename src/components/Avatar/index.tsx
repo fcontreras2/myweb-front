@@ -7,7 +7,7 @@ const Avatar = () => (
   >
 
     <div className="container z-10">
-      <div className="text-center  p-6  w-1/2 mx-auto">
+      <div className="text-center p-6  lg:w-1/2 mx-auto">
         <div className="mx-auto rounded-full w-[100px] h-[100px] overflow-hidden relative border-2 mb-6">
           <Image
             src="/avatar.png"
@@ -15,7 +15,7 @@ const Avatar = () => (
             width={100}
             height={100}
           />
-        </div>{" "}
+        </div>
         <h1 className="font-poppins font-semibold text-gray-700 uppercase">
           Hola, soy <span className="text-primary-500">Freddy Contreras</span>
         </h1>

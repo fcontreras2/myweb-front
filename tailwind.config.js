@@ -13,6 +13,9 @@ module.exports = {
         // Simple 16 column grid
         16: "repeat(16, minmax(0, 1fr))",
       },
+      gridColumn: {
+        'span-16': 'span 16 / span 16',
+      },
       fontFamily: {
         poppins: ["Poppins", ...defaultTheme.fontFamily.sans],
       },
@@ -36,8 +39,8 @@ module.exports = {
     },
     container: {
       screens: {
-        sm: "360px",
-        md: "744px",
+        sm: "320px",
+        md: "704px",
         lg: "1008px",
         xl: "1240px",
       },

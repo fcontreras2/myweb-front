@@ -6,9 +6,9 @@ const Home: NextPage = () => {
   return (
     <>
       <Layout avatar className="pt-16">
-        <div className="col-start-1 col-end-11">
+        <div className="col-span-16 lg:col-start-1 lg:col-end-11">
           <div className="flex justify-between items-end">
-            <h4 className="text-3xl font-semibold border-b-2 w-32 border-b-primary-300">
+            <h4 className="text-2xl lg:text-3xl font-semibold border-b-2 w-32 border-b-primary-300">
               POSTS
             </h4>
             <p className="text-gray-600">20 resultados</p>
@@ -57,7 +57,7 @@ const Home: NextPage = () => {
               </div>
             ))}
         </div>
-        <div className="col-start-13 col-span-4 relative">
+        <div className="col-span-16 lg:col-start-13 lg:col-span-4 relative">
           <div className="sticky ">
             <h3 className="text-lg font-semibold border-b-2 w-32 border-b-primary-300">
               PROJECTS
