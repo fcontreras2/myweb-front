@@ -1,8 +1,11 @@
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import NavBarLink from "./NavBarLink";
 import MenuBars from "icons/menu-bars.svg";
-import { useState } from "react";
+import Close from "icons/close.svg";
+import useResize, { Screen } from "hooks/useResize";
+
 
 const LINKS: { url: string; title: string }[] = [
   { title: "Posts", url: "/" },
@@ -12,6 +15,13 @@ const LINKS: { url: string; title: string }[] = [
 
 const NavBar = () => {
   const [open, setOpen] = useState<boolean>(false);
+  const { isLarge } = useResize(Screen.lg);
+
+  useEffect(() => {
+    const body = document.querySelector("body");
+    if (open && !isLarge ) body?.classList.add("overflow-hidden");
+    else body?.classList.remove("overflow-hidden");
+  }, [open, isLarge]);
 
   return (
     <>
@@ -34,21 +44,27 @@ const NavBar = () => {
               <NavBarLink key={link.url} {...link} />
             ))}
           </div>
-          <button className="p-4 right-4 lg:hidden" onClick={() => setOpen(!open)}>
-            <MenuBars height={"16px"} width={"16px"} />
+          <button
+            className="p-4 right-4 lg:hidden"
+            onClick={() => setOpen(!open)}
+          >
+            {open ? (
+              <Close height={"16px"} width={"16px"} />
+            ) : (
+              <MenuBars height={"16px"} width={"16px"} />
+            )}
           </button>
         </header>
       </div>
-      {
-        open &&
-        <div className="z-20 lg:hidden absolute mt-[66px] h-screen w-screen bg-white pt-4">
+      {open && (
+        <div className="z-20 lg:hidden fixed mt-[66px] h-screen w-screen bg-white pt-4">
           <div className="container mx-auto flex flex-col space-y-4">
             {LINKS.map((link) => (
               <NavBarLink key={link.url} {...link} />
             ))}
           </div>
         </div>
-      }
+      )}
     </>
   );
 };
