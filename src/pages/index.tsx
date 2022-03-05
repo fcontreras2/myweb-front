@@ -15,9 +15,9 @@ const Home: NextPage = () => {
           </div>
           {Array(10)
             .fill(10)
-            .map(() => (
-              <div className="w-full flex flex-col space-y-2 my-10 border-2 px-8 py-10 cursor-pointer hover:shadow-md">
-                <h3 className="font-semibold text-xl ">Javascript Ejemplo</h3>
+            .map((e, i) => (
+              <div className="w-full flex flex-col space-y-2 my-10 border-2 px-8 py-10 cursor-pointer hover:shadow-md" key={"card-" + i}>
+                <h3 className="font-semibold text-xl  ">Javascript Ejemplo</h3>
                 <div className="flex items-center space-x-2">
                   <span className="text-normal text-xs text-gray-10">20 Jun, 2021 </span>
                   <span className="p-0.5 px-2 rounded-full border-2 text-gray-500 text-xs">React</span>
@@ -50,8 +50,8 @@ const Home: NextPage = () => {
           </h3>
           {Array(3)
             .fill(10)
-            .map(() => (
-              <div className="w-full flex flex-col space-y-2 my-4 border-2 p-6">
+            .map((e,i) => (
+              <div className="w-full flex flex-col space-y-2 my-4 border-2 p-6" key={"card2-" + i}>
                 <h3 className="font-semibold text-md">Javascript Ejemplo</h3>
                 <span className="text-normal text-xs text-gray-500">10-12-2021 </span>
                 <p className="line-clamp-3 text-sm text-gray-500">
