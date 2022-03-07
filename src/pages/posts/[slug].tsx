@@ -13,19 +13,20 @@ import Github from "icons/github.svg";
 import ReactMarkdown from "react-markdown";
 import Image from "components/Image";
 import Link from "next/link";
+import Meta from "components/Meta";
 
 type Props = {
   post: StrapiData<Post>;
 };
 
 const Post: NextPage<Props> = ({ post }: Props) => {
-  
   const { avatar } = useContext(GlobalContext);
 
   if (!post) return null;
-  
+
   return (
     <>
+      <Meta {...post.attributes.seo} />
       <Layout className="pt-32">
         <div className="col-span-16 lg:col-start-1 lg:col-end-11 flex flex-col space-y-8">
           <div className="">

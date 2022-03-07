@@ -13,7 +13,7 @@ const Image = ({
     <NextImage
       width={width}
       height={height}
-      src={getStrapiMedia(src as StrapiImage) as string}
+      src={typeof src === "string" ? src : getStrapiMedia(src as StrapiImage) as string}
       alt={alt || ""}
       {...props}
     />

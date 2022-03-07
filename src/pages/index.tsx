@@ -4,14 +4,21 @@ import Layout from "shared/Layout";
 import { Post } from "interfaces/post";
 import { StrapiPaginationData } from "interfaces/strapi";
 import CardPost from "components/CardPost";
+import Head from "next/head";
+import { useContext } from "react";
+import { GlobalContext } from "./_app";
+import Meta from "components/Meta";
 
 type Props = {
   posts: StrapiPaginationData<Post>;
 };
 
 const Home: NextPage<Props> = ({ posts }: Props) => {
+  const { seo } = useContext(GlobalContext);
+
   return (
     <>
+      <Meta {...seo}/>
       <Layout
         showAvatar
         className="pt-16"

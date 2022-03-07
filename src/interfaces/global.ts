@@ -1,3 +1,4 @@
+import { Meta } from "./seo";
 import { StrapiImage } from "./strapi";
 
 export type Link = {
@@ -16,5 +17,6 @@ export interface GlobalApp extends Avatar {
     logo: StrapiImage;
     links: Link[]
   },
-  avatar: Avatar
+  avatar: Avatar,
+  seo: Meta
 } 

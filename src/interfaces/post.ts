@@ -1,4 +1,5 @@
-import { StrapiData, StrapiImage, StrapiPopulate } from "./strapi";
+import { Meta } from "./seo";
+import { StrapiImage, StrapiPopulate } from "./strapi";
 
 export interface Tag {
   title: string;
@@ -9,5 +10,6 @@ export interface Post {
   title: string;
   content: string;
   image: StrapiImage;
-  tags: StrapiPopulate<Tag>
+  tags: StrapiPopulate<Tag>,
+  seo: Meta
 }

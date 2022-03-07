@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "components/Image";
 import ReactMarkdown from "react-markdown";
 import { ReactMarkdownOptions } from "react-markdown/lib/react-markdown";
 import SyntaxHighlighter from "react-syntax-highlighter";
@@ -18,13 +18,13 @@ const MarkdownContent = (props: ReactMarkdownOptions) => {
             className="text-primary-300 underline"
           />
         ),
+        h4: ({ children }) => (
+          <h4 className="font-semibold text-xl">{children}</h4>
+        ),
         img: ({ src, alt, ...props }: any) => (
-          <div className="w-[769px] h-[300px] relative">
+          <div className="w-[769px] h-[300px] relative mt-8">
             <Image
-              src={
-                (process.env.NEXT_PUBLIC_STRAPI_API_URL ||
-                  "http://localhost:1337") + src
-              }
+              src={src}
               layout="fill"
               alt={alt}
               {...props}

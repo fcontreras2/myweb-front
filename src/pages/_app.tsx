@@ -30,6 +30,10 @@ MyApp.getInitialProps = async (ctx: any) => {
       avatar: {
         populate: "*",
       },
+      seo: {
+        populate: "*",
+        metaSocial: ["image"]
+      }
     },
   });
   // Pass the data to our page via props
