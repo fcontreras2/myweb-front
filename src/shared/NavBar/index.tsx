@@ -1,25 +1,20 @@
-import { useEffect, useState } from "react";
-import Image from "next/image";
+import React, { useContext, useEffect, useState } from "react";
 import Link from "next/link";
 import NavBarLink from "./NavBarLink";
 import MenuBars from "icons/menu-bars.svg";
 import Close from "icons/close.svg";
 import useResize, { Screen } from "hooks/useResize";
+import { GlobalContext } from "pages/_app";
+import Image from "components/Image";
 
-
-const LINKS: { url: string; title: string }[] = [
-  { title: "Posts", url: "/" },
-  { title: "Projects", url: "/projects" },
-  { title: "Resumen", url: "/resumen" },
-];
-
-const NavBar = () => {
+const NavBar = React.memo(() => {
   const [open, setOpen] = useState<boolean>(false);
+  const { navbar } = useContext(GlobalContext);
   const { isLarge } = useResize(Screen.lg);
 
   useEffect(() => {
     const body = document.querySelector("body");
-    if (open && !isLarge ) body?.classList.add("overflow-hidden");
+    if (open && !isLarge) body?.classList.add("overflow-hidden");
     else body?.classList.remove("overflow-hidden");
   }, [open, isLarge]);
 
@@ -31,16 +26,15 @@ const NavBar = () => {
             <Link href={"/"}>
               <a>
                 <Image
-                  src="/logo.svg"
-                  width={110}
-                  height={"64px"}
-                  alt="Logo fcontreras2"
-                />
+                  src={navbar.logo} 
+                  alt="Logo" 
+                  width={110} 
+                  height={64}/>
               </a>
             </Link>
           </div>
           <div className="hidden  lg:flex justify-end  space-x-8 w-1/2">
-            {LINKS.map((link) => (
+            {navbar.links.map((link) => (
               <NavBarLink key={link.url} {...link} />
             ))}
           </div>
@@ -59,7 +53,7 @@ const NavBar = () => {
       {open && (
         <div className="z-20 lg:hidden fixed mt-[66px] h-screen w-screen bg-white pt-4">
           <div className="container mx-auto flex flex-col space-y-4">
-            {LINKS.map((link) => (
+            {navbar.links.map((link) => (
               <NavBarLink key={link.url} {...link} />
             ))}
           </div>
@@ -67,6 +61,6 @@ const NavBar = () => {
       )}
     </>
   );
-};
+});
 
 export default NavBar;

@@ -14,7 +14,11 @@ const nextConfig = {
     });
 
     return config;
-  }
+  },
+  images: {
+    loader: "default",
+    domains: ["localhost"],
+  },
 };
 
 module.exports = nextConfig;

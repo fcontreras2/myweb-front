@@ -4,10 +4,10 @@ import { useEffect, useState } from "react";
 
 type Props = {
   url: string;
-  title: string;
+  name: string;
 };
 
-const NavBarLink = ({ url, title }: Props) => {
+const NavBarLink = ({ url, name }: Props) => {
   const { asPath, isReady } = useRouter();
   const [ className, setClassName] = useState<string>(""); 
 
@@ -23,7 +23,8 @@ const NavBarLink = ({ url, title }: Props) => {
       const activePathname = new URL(asPath, location.href).pathname
 
       const newClassName =
-        linkPathname === activePathname
+        linkPathname === activePathname || 
+        activePathname.includes(linkPathname + '/') 
           ? `text-primary`
           : 'text-gray-800'
 
@@ -39,7 +40,7 @@ const NavBarLink = ({ url, title }: Props) => {
 
   return (
     <Link href={url}>
-      <a className={`font-normal ${className} hover:text-primary`}>{title}</a>
+      <a className={`font-normal ${className} hover:text-primary`}>{name}</a>
     </Link>
   );
 };

@@ -9,27 +9,22 @@ type Props = {
   posts: StrapiPaginationData<Post>;
 };
 
-const Home: NextPage<Props> = ({ posts }: Props) => {
+const Posts: NextPage<Props> = ({ posts }: Props) => {
   return (
     <>
       <Layout
-        showAvatar
-        className="pt-16"
-        link="/posts"
+        className="pt-32"
         left={{
           title: "POSTS",
           pagination: posts.meta.pagination,
-          component: posts.data.map((post, i) => (
-            <CardPost key={post.attributes.slug + post.id + i} {...post} />
+          component: posts.data.map((post) => (
+            <CardPost key={post.attributes.slug + post.id + '1'} {...post} />
           )),
-        }}  
+        }}
         right={{
           title: "PROJECTS",
-          component: posts.data.map((post, i) => (
-            <CardPost
-              key={post.attributes.slug + post.id + "2" + i}
-              {...post}
-            />
+          component: posts.data.map((post) => (
+            <CardPost key={post.attributes.slug + post.id + '2'} {...post} />
           )),
         }}
       />
@@ -51,4 +46,4 @@ export async function getStaticProps() {
   };
 }
 
-export default Home;
+export default Posts;

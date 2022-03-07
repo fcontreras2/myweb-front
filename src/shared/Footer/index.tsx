@@ -3,7 +3,7 @@ import Github from 'icons/github.svg';
 
 const Footer = () => {
   return (
-    <div className="bg-gray-700">
+    <div className="bg-gray-700 z-10">
       <div className="container flex   text-white py-10 mx-auto ">
         <div className="w-1/2">
           <h5 className="text-xl border-b-2 w-32 border-b-white mb-4">
@@ -17,8 +17,8 @@ const Footer = () => {
           </p>
         </div>
         <div className="flex  justify-end items-center space-x-4 w-1/2">
-          <LinkedIn fill="#ffffff"/>
-          <Github fill="#ffffff"/>
+          <LinkedIn width={'32px'} height={'32px'} fill="#ffffff"/>
+          <Github width={'32px'} height={'32px'} fill="#ffffff"/>
         </div>
       </div>
     </div>
