@@ -17,7 +17,7 @@ const nextConfig = {
   },
   images: {
     loader: "default",
-    domains: ["localhost"],
+    domains: ["localhost", "https://myweb-api-fcontreras2.herokuapp.com"],
   },
 };
 
