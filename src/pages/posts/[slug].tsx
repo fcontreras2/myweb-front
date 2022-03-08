@@ -58,7 +58,7 @@ const Post: NextPage<Props> = ({ post }: Props) => {
             </MarkdownContent>
           </article>
         </div>
-        <div className="col-span-16 lg:col-start-13 lg:col-span-4  h-max py-8 pl-12 pt-0 sticky top-32 space-y-2">
+        <div className="col-span-16 lg:col-start-13 lg:col-span-4  h-max pt-16 lg:py-8 lg:pl-12 lg:pt-0 sticky top-32 space-y-2">
           <div className="rounded-full w-[100px] h-[100px] overflow-hidden relative border-2 mb-6">
             <Image
               src={avatar.image}
@@ -85,7 +85,7 @@ const Post: NextPage<Props> = ({ post }: Props) => {
             .map((i) => (
               <Link href={"/"} key={"related-" + i}>
                 <a className="group flex space-x-4 pt-4">
-                  <div className="relative w-[40px] h-[40px]">
+                  <div className="relative  w-[40px] h-[40px]">
                     <Image
                       src={post.attributes.image}
                       objectFit="cover"

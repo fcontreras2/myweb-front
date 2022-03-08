@@ -22,7 +22,7 @@ const MarkdownContent = (props: ReactMarkdownOptions) => {
           <h4 className="font-semibold text-xl">{children}</h4>
         ),
         img: ({ src, alt, ...props }: any) => (
-          <div className="w-[769px] h-[300px] relative mt-8">
+          <div className="w-[320px] h-[300px] lg:w-[769px] lg:h-[300px] relative mt-8">
             <Image
               src={src}
               layout="fill"
