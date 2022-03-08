@@ -29,8 +29,8 @@ const NavBar = React.memo(() => {
                   <Image
                     src={navbar.logo}
                     alt="Logo"
-                    width={'110px'}
-                    height={'64px'}
+                    width={110}
+                    height={64}
                     layout="responsive"
                   />
                 </div>
