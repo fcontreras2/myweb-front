@@ -8,7 +8,7 @@ const Image = ({
   height,
   alt,
   ...props
-}: Omit<ImageProps, "src"> & { src: StrapiImage }) => {
+}: Omit<ImageProps, "src"> & { src: StrapiImage | string }) => {
   return (
     <NextImage
       width={width}
