@@ -12,14 +12,11 @@ const nextConfig = {
       test: /\.svg$/,
       use: ["@svgr/webpack"]
     });
-
-    const imageLoaderRule = config.module.rules.find(rule => rule.loader == "next-image-loader")
-    imageLoaderRule.exclude = /\.react\.svg$/
-
     return config;
   },
   images: {
     loader: "default",
+    dangerouslyAllowSVG: true,
     domains: ["localhost", "api.fcontreras2.com"],
   },
 };
