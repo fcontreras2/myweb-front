@@ -17,6 +17,7 @@ const nextConfig = {
   images: {
     loader: "default",
     dangerouslyAllowSVG: true,
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
     domains: ["localhost", "api.fcontreras2.com"],
   },
 };
