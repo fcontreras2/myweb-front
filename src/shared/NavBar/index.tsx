@@ -27,10 +27,10 @@ const NavBar = React.memo(() => {
               <a>
                 <div className="relative w-[100px] h-[64px]">
                   <Image
-                    src={"https://upload.wikimedia.org/wikipedia/commons/b/b2/Bootstrap_logo.svg"}
+                    src={navbar.logo}
                     alt="Logo"
-                    width={110}
-                    height={64}
+                    width={'110px'}
+                    height={'64px'}
                     layout="responsive"
                   />
                 </div>
