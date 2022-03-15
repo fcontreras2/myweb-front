@@ -1,5 +1,4 @@
 const path = require("path");
-const withImages = require("next-images");
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -17,10 +16,10 @@ const nextConfig = {
   },
   images: {
     loader: "default",
-    dangerouslyAllowSVG: true,
+    dangerouslyAllowSVG: false,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
     domains: ["localhost", "api.fcontreras2.com"],
   },
 };
 
-module.exports = withImages(nextConfig);
+module.exports = nextConfig;
