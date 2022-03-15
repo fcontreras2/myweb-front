@@ -1,25 +1,22 @@
-import { ImageProps } from "next/image";
+import NextImage, { ImageProps } from "next/image";
 import { getStrapiMedia } from "lib/media";
 import { StrapiImage } from "interfaces/strapi";
-import { useMemo } from "react";
 
 const Image = ({
   src,
+  width,
+  height,
+  alt,
   ...props
-}: Omit<ImageProps, "src"> & {
-  src: StrapiImage | string;
-  containerClass?: string;
-}) => {
-  const srcImg: string = useMemo(() => {
-    return typeof src === "string"
-      ? process.env.NEXT_PUBLIC_STRAPI_API_URL + src
-      : (getStrapiMedia(src as StrapiImage) as string);
-  }, [src]);
-
+}: Omit<ImageProps, "src"> & { src: StrapiImage | string }) => {
   return (
-    <div className={`relative w-full h-full ${props.containerClass || ""}`}>
-      <img src={srcImg} {...props} />
-    </div>
+    <NextImage
+      width={width}
+      height={height}
+      src={typeof src === "string" ? (process.env.NODE_ENV === 'development' ? 'http://localhost:1337' : process.env.NEXT_PUBLIC_STRAPI_API_URL) +  src : getStrapiMedia(src as StrapiImage) as string}
+      alt={alt || ""}
+      {...props}
+    />
   );
 };
 
