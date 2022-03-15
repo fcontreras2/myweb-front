@@ -1,8 +1,7 @@
-import NextImage, { ImageProps } from "next/image";
+import { ImageProps } from "next/image";
 import { getStrapiMedia } from "lib/media";
 import { StrapiImage } from "interfaces/strapi";
 import { useMemo } from "react";
-import LazyLoad from "react-lazyload";
 
 const Image = ({
   src,
@@ -18,10 +17,8 @@ const Image = ({
   }, [src]);
 
   return (
-    <div className={`relative w-full h-full ${props.containerClass || ''}`}>
-      <LazyLoad height="100%" once>
-        <NextImage src={srcImg} {...props} />
-      </LazyLoad>
+    <div className={`relative w-full h-full ${props.containerClass || ""}`}>
+      <img src={srcImg} {...props} />
     </div>
   );
 };

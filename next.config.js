@@ -4,6 +4,7 @@ const path = require("path");
 const nextConfig = {
   reactStrictMode: true,
   baseUrl: "src",
+  inlineImageLimit: false,
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],
   },
@@ -22,4 +23,4 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig;
+module.exports = (nextConfig);
