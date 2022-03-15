@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "dayjs": "^1.10.8",
+    "external-svg-loader": "^1.4.0",
     "next": "12.1.0",
     "next-compose-plugins": "^2.2.1",
     "next-images": "^1.8.4",
