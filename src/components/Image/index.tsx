@@ -13,7 +13,7 @@ const Image = ({
     <NextImage
       width={width}
       height={height}
-      src={typeof src === "string" ? (process.env.NODE_ENV === 'development' ? 'http://localhost:1337' : process.env.NEXT_PUBLIC_STRAPI_API_URL) +  src : getStrapiMedia(src as StrapiImage) as string}
+      src={"https://www.svgrepo.com/show/106361/user-online.svg"}
       alt={alt || ""}
       {...props}
     />
