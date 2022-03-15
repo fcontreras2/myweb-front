@@ -1,4 +1,5 @@
 const path = require("path");
+const withImages = require("next-images");
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -8,12 +9,6 @@ const nextConfig = {
     includePaths: [path.join(__dirname, 'styles')],
   },
   webpack(config) {
-    const fileLoaderRule = config.module.rules.find(
-      (rule) => rule.test && rule.test.test('.svg')
-    );
-
-    fileLoaderRule.exclude = /\.svg$/;
-    
     config.module.rules.push({
       test: /\.svg$/,
       use: ["@svgr/webpack"]
@@ -28,4 +23,4 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig;
+module.exports = withImages(nextConfig);
