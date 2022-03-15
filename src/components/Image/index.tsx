@@ -13,7 +13,7 @@ const Image = ({
       : (getStrapiMedia(src as StrapiImage) as string);
   }, []);
 
-  return <NextImage src={srcImg} {...props} />
+  return <img src={srcImg} {...props} />
 };
 
 export default Image;
