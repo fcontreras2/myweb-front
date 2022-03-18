@@ -5,11 +5,15 @@ import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
-const CardPost = ({ id, ...props }: StrapiData<Post>) => {
+const CardPost = ({
+  id,
+  exclude,
+  ...props
+}: { exclude?: boolean } & StrapiData<Post>) => {
   const { slug, title, content, createdAt, tags } = props.attributes;
   return (
     <Link href={"/posts/" + slug}>
-      <a className="group w-full flex flex-col space-y-2 my-10 border-2 px-8 py-10 cursor-pointer hover:shadow-md">
+      <a className="group col-span-16 flex flex-col space-y-2 my-4 py-4 cursor-pointer">
         <h3 className="font-semibold text-xl group-hover:text-primary-400">
           {title}
         </h3>
@@ -26,10 +30,12 @@ const CardPost = ({ id, ...props }: StrapiData<Post>) => {
             </span>
           ))}
         </div>
-        <div className="line-clamp-3 text-sm text-gray-500">
-          <ReactMarkdown remarkPlugins={[remarkGfm]}>{content}</ReactMarkdown>
-        </div>
-        <span className="text-primary-400 text-sm font-semibold">
+        {!exclude && (
+          <div className="line-clamp-3 text-sm text-gray-500">
+            <ReactMarkdown remarkPlugins={[remarkGfm]}>{content}</ReactMarkdown>
+          </div>
+        )}
+        <span className="text-gray-700 text-sm font-semibold group-hover:text-primary-400">
           Continuar...
         </span>
       </a>

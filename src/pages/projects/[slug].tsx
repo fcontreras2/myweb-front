@@ -1,55 +1,49 @@
 import Link from "next/link";
 import { useContext } from "react";
 import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
-import ReactMarkdown from "react-markdown";
 import { fetchAPI } from "lib/api";
 import { StrapiData, StrapiPaginationData } from "interfaces/strapi";
 import remarkGfm from "remark-gfm";
 import MarkdownContent from "components/Markdown/MarkdownContent";
-import getDay from "lib/days";
 import { GlobalContext } from "pages/_app";
-import { Post } from "interfaces/post";
-import Image from "components/Image";
 import Meta from "components/Meta";
 import ContentTitle from "components/Content/ContentTitle";
 import ContentImage from "components/Content/ContentImage";
 import Layout from "shared/Layout";
 import ContentAuthor from "components/Content/ContentAuthor";
 import ContentRelatedPost from "components/Content/ContentRelatedPost";
+import { Project } from "interfaces/project";
 
 type Props = {
-  post: StrapiData<Post>;
+  project: StrapiData<Project>;
 };
 
-const Post: NextPage<Props> = ({ post }: Props) => {
+const Project: NextPage<Props> = ({ project }: Props) => {
   const { avatar } = useContext(GlobalContext);
-
-  if (!post) return null;
-
-  return (
+    return (
     <>
-      <Meta {...post.attributes.seo} />
+      <Meta {...project.attributes.seo} />
       <Layout className="pt-32">
         <div className="col-span-16 lg:col-start-1 lg:col-end-12 flex flex-col space-y-8">
           <ContentTitle
-            title={post.attributes.title}
-            tags={post.attributes.tags}
+            title={project.attributes.title}
+            tags={project.attributes.tags}
           />
-          {post.attributes.image && (
-            <ContentImage image={post.attributes.image} />
+          {project.attributes.image && (
+            <ContentImage image={project.attributes.image} />
           )}
           <article className="flex flex-col space-y-8 relative">
             <MarkdownContent remarkPlugins={[remarkGfm]}>
-              {post.attributes.content}
+              {project.attributes.content}
             </MarkdownContent>
           </article>
         </div>
         <div className="col-span-16 lg:col-start-13 lg:col-span-6  h-max pt-16 lg:py-8 lg:pl-12 lg:pt-0 sticky top-32 space-y-2">
           <ContentAuthor
             avatar={avatar}
-            createdAt={post.attributes.createdAt}
+            createdAt={project.attributes.createdAt}
           />
-          <ContentRelatedPost {...post} />
+          <ContentRelatedPost {...project} />
         </div>
       </Layout>
     </>
@@ -59,30 +53,30 @@ const Post: NextPage<Props> = ({ post }: Props) => {
 export const getStaticProps: GetStaticProps = async (context) => {
   const { params } = context;
 
-  const posts: StrapiPaginationData<Post> = await fetchAPI(`/posts`, {
+  const projects: StrapiPaginationData<Project> = await fetchAPI(`/projects`, {
     populate: "*",
     "filters[slug][$eq]": `${(params as { slug: string }).slug}`,
   });
 
   return {
-    props: { post: posts.data[0] },
+    props: { project: projects.data[0] },
     revalidate: 60,
-    notFound: posts.data.length === 0,
+    notFound: projects.data.length === 0,
   };
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const posts: StrapiPaginationData<Post> = await fetchAPI("/posts", {
+  const projects: StrapiPaginationData<Project> = await fetchAPI("/projects", {
     populate: "*",
     _limit: "-1",
   });
 
   return {
-    paths: posts.data.map((post) => ({
-      params: { slug: post.attributes.slug },
+    paths: projects.data.map((project) => ({
+      params: { slug: project.attributes.slug },
     })),
     fallback: true,
   };
 };
 
-export default Post;
+export default Project;

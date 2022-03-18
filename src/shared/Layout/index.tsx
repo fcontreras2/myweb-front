@@ -19,6 +19,7 @@ interface Props {
   className?: string;
   link?: string;
   pagination?: boolean;
+  textResult?:string;
 }
 
 const Layout = ({
@@ -28,9 +29,9 @@ const Layout = ({
   pagination,
   showAvatar,
   link,
+  textResult,
   ...props
 }: Props) => {
-
   return (
     <div className="flex flex-col min-h-screen justify-between">
       <div className="pb-16">
@@ -47,11 +48,13 @@ const Layout = ({
                 </h4>
                 {left?.pagination?.total && (
                   <p className="text-gray-600">
-                    {left?.pagination.total} resultados
+                    {left?.pagination.total} {textResult || 'resultados'}
                   </p>
                 )}
               </div>
-              {left?.component}
+              <div className="lg:grid lg:grid-cols-16 lg:gap-x-10">
+                {left?.component}
+              </div>
               {pagination && <div>Pagination</div>}
               {link && (
                 <Link href={link}>
@@ -59,13 +62,16 @@ const Layout = ({
                 </Link>
               )}
             </div>
-            <div className="col-span-16 lg:col-start-13 lg:col-span-4 sticky top-32">
-              <div className="sticky ">
-                <h4 className="text-lg font-semibold border-b-2 w-32 border-b-primary-300">
-                  {right?.title}
-                </h4>
-                {right?.component}
-              </div>
+            <div className="col-span-16 lg:col-start-13 lg:col-span-6 h-[200px] sticky top-24">
+              <h4 className="text-lg font-semibold border-b-2 w-32 border-b-primary-300">
+                {right?.title}
+              </h4>
+              {right?.component}
+              {link && (
+                <Link href={link}>
+                  <a className="text-primary-400 font-semibold">Ver todos</a>
+                </Link>
+              )}
             </div>
           </GridWrapper>
         )}

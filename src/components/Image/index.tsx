@@ -1,6 +1,7 @@
 import NextImage, { ImageProps } from "next/image";
 import { getStrapiMedia } from "lib/media";
 import { StrapiImage } from "interfaces/strapi";
+import { useMemo } from "react";
 
 const Image = ({
   src,
@@ -9,11 +10,13 @@ const Image = ({
   alt,
   ...props
 }: Omit<ImageProps, "src"> & { src: StrapiImage | string }) => {
+
+
   return (
     <NextImage
       width={width}
       height={height}
-      src={"https://www.svgrepo.com/show/106361/user-online.svg"}
+      src={typeof src === 'string' ? ( process.env.NEXT_PUBLIC_STRAPI_API_URL +  src) : getStrapiMedia((src as StrapiImage))}
       alt={alt || ""}
       {...props}
     />
