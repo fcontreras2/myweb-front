@@ -4,7 +4,6 @@ import Layout from "shared/Layout";
 import { Post } from "interfaces/post";
 import { StrapiPaginationData } from "interfaces/strapi";
 import CardPost from "components/CardPost";
-import Head from "next/head";
 import { useContext } from "react";
 import { GlobalContext } from "./_app";
 import Meta from "components/Meta";
@@ -25,7 +24,8 @@ const Home: NextPage<Props> = ({ posts, projects }: Props) => {
       <Layout
         showAvatar
         className="pt-16"
-        link="/posts"
+        linkLeft="/posts"
+        linkRight="/projects"
         left={{
           title: "POSTS",
           pagination: posts.meta.pagination,
@@ -37,6 +37,7 @@ const Home: NextPage<Props> = ({ posts, projects }: Props) => {
           title: "PROYECTOS",
           component: projects.data.map((project, i) => (
             <CardProject
+              exclude
               key={project.attributes.slug + project.id + "2" + i}
               {...project}
             />
@@ -53,6 +54,7 @@ export async function getStaticProps() {
     fetchAPI("/posts", { populate: { image: "*", tags: "*" } }),
     fetchAPI("/projects", {
       populate: { image: "*", tags: "*", icon: "*" },
+      "filters[important][$eq]": true,
       pagination: {
         pageSize: 3,
       },

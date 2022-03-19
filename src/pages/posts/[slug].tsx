@@ -6,10 +6,8 @@ import { fetchAPI } from "lib/api";
 import { StrapiData, StrapiPaginationData } from "interfaces/strapi";
 import remarkGfm from "remark-gfm";
 import MarkdownContent from "components/Markdown/MarkdownContent";
-import getDay from "lib/days";
 import { GlobalContext } from "pages/_app";
 import { Post } from "interfaces/post";
-import Image from "components/Image";
 import Meta from "components/Meta";
 import ContentTitle from "components/Content/ContentTitle";
 import ContentImage from "components/Content/ContentImage";
@@ -23,8 +21,6 @@ type Props = {
 
 const Post: NextPage<Props> = ({ post }: Props) => {
   const { avatar } = useContext(GlobalContext);
-
-  if (!post) return null;
 
   return (
     <>

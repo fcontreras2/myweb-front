@@ -23,6 +23,7 @@ const Projects: NextPage<Props> = ({ posts, projects }: Props) => {
       <Meta {...seo} />
       <Layout
         className="pt-32 min-h-[46vw]"
+        linkRight="/posts"
         left={{
           title: "PROYECTOS",
           pagination: projects.meta.pagination,

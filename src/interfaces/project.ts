@@ -8,6 +8,7 @@ export interface Project {
   content: string;
   image: StrapiImage;
   icon: StrapiImage;
+  link_demo: string;
   tags: StrapiPopulate<Tag>,
   seo: Meta
 }

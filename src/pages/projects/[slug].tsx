@@ -20,17 +20,20 @@ type Props = {
 
 const Project: NextPage<Props> = ({ project }: Props) => {
   const { avatar } = useContext(GlobalContext);
-    return (
+  return (
     <>
       <Meta {...project.attributes.seo} />
       <Layout className="pt-32">
-        <div className="col-span-16 lg:col-start-1 lg:col-end-12 flex flex-col space-y-8">
+        <div className="col-span-16 lg:col-start-1 lg:col-end-12 flex flex-col space-y-4">
           <ContentTitle
             title={project.attributes.title}
             tags={project.attributes.tags}
           />
           {project.attributes.image && (
-            <ContentImage image={project.attributes.image} />
+            <ContentImage
+              image={project.attributes.image}
+              link_demo={project.attributes.link_demo}
+            />
           )}
           <article className="flex flex-col space-y-8 relative">
             <MarkdownContent remarkPlugins={[remarkGfm]}>

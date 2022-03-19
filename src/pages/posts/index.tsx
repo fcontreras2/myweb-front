@@ -23,6 +23,8 @@ const Posts: NextPage<Props> = ({ posts, projects }: Props) => {
       <Meta {...seo} />
       <Layout
         className="pt-32"
+        linkRight="/projects"
+        pagination
         left={{
           title: "POSTS",
           pagination: posts.meta.pagination,
@@ -38,6 +40,7 @@ const Posts: NextPage<Props> = ({ posts, projects }: Props) => {
             ) : (
               projects.data.map((post, i) => (
                 <CardProject
+                  exclude
                   key={post.attributes.slug + post.id + "2" + i}
                   {...post}
                 />
@@ -52,8 +55,19 @@ const Posts: NextPage<Props> = ({ posts, projects }: Props) => {
 export async function getStaticProps() {
   // Run API calls in parallel
   const [posts, projects] = await Promise.all([
-    fetchAPI("/posts", { populate: { image: "*", tags: "*" } }),
-    fetchAPI("/projects", { populate: { image: "*", tags: "*", icon: "*"  } }),
+    fetchAPI("/posts", {
+      populate: { image: "*", tags: "*" },
+      pagination: {
+        pageSize: 7,
+      },
+    }),
+    fetchAPI("/projects", {
+      populate: { image: "*", tags: "*", icon: "*" },
+      "filters[important][$eq]": true,
+      pagination: {
+        pageSize: 3,
+      },
+    }),
   ]);
 
   return {

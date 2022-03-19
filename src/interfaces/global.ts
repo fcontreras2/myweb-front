@@ -18,5 +18,7 @@ export interface GlobalApp extends Avatar {
     links: Link[]
   },
   avatar: Avatar,
+  link_github: string;
+  link_linkedin: string;
   seo: Meta
 } 

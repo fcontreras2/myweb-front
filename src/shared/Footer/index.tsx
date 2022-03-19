@@ -1,7 +1,11 @@
-import LinkedIn from 'icons/linkedin.svg';
-import Github from 'icons/github.svg';
+import LinkedIn from "icons/linkedin.svg";
+import Github from "icons/github.svg";
+import { useContext } from "react";
+import { GlobalContext } from "pages/_app";
+import Link from "next/link";
 
 const Footer = () => {
+  const { link_github, link_linkedin } = useContext(GlobalContext);
   return (
     <div className="bg-gray-700 z-10">
       <div className="container flex   text-white py-10 mx-auto ">
@@ -17,8 +21,16 @@ const Footer = () => {
           </p>
         </div>
         <div className="flex  justify-end items-center space-x-4 w-1/2">
-          <LinkedIn width={'32px'} height={'32px'} fill="#ffffff"/>
-          <Github width={'32px'} height={'32px'} fill="#ffffff"/>
+          <Link href={link_github}>
+            <a target="_blank" rel="noopener noreferrer">
+              <Github width={"32px"} height={"32px"} fill="#ffffff" />
+            </a>
+          </Link>
+          <Link href={link_linkedin}>
+            <a target="_blank" rel="noopener noreferrer">
+              <LinkedIn width={"32px"} height={"32px"} fill="#ffffff" />
+            </a>
+          </Link>
         </div>
       </div>
     </div>

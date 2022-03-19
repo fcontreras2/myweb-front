@@ -35,8 +35,8 @@ const CardPost = ({
             <ReactMarkdown remarkPlugins={[remarkGfm]}>{content}</ReactMarkdown>
           </div>
         )}
-        <span className="text-gray-700 text-sm font-semibold group-hover:text-primary-400">
-          Continuar...
+        <span className="text-gray-500 text-sm font-semibold group-hover:text-primary-400">
+          Leer más...
         </span>
       </a>
     </Link>

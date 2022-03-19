@@ -31,7 +31,7 @@ const ContentRelatedPost = (post: StrapiData<Post>) => {
                   {post.attributes.content}
                 </ReactMarkdown>
                 <span className="text-primary-400 text-xs font-semibold">
-                  Continuar...
+                  Leer más...
                 </span>
               </div>
             </a>

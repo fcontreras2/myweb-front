@@ -1,5 +1,6 @@
 import AvatarComponent from "components/Avatar";
 import GridWrapper from "components/Grid";
+import Pagination from "components/Pagination/indext";
 import { StrapiPagination } from "interfaces/strapi";
 import Link from "next/link";
 import Footer from "shared/Footer";
@@ -17,7 +18,8 @@ interface Props {
   right?: ListProps;
   showAvatar?: boolean;
   className?: string;
-  link?: string;
+  linkLeft?: string;
+  linkRight?: string;
   pagination?: boolean;
   textResult?:string;
 }
@@ -28,7 +30,8 @@ const Layout = ({
   right,
   pagination,
   showAvatar,
-  link,
+  linkLeft,
+  linkRight,
   textResult,
   ...props
 }: Props) => {
@@ -55,9 +58,9 @@ const Layout = ({
               <div className="lg:grid lg:grid-cols-16 lg:gap-x-10">
                 {left?.component}
               </div>
-              {pagination && <div>Pagination</div>}
-              {link && (
-                <Link href={link}>
+              {pagination && <Pagination />}
+              {linkLeft && (
+                <Link href={linkLeft}>
                   <a className="text-primary-400 font-semibold">Ver todos</a>
                 </Link>
               )}
@@ -67,8 +70,8 @@ const Layout = ({
                 {right?.title}
               </h4>
               {right?.component}
-              {link && (
-                <Link href={link}>
+              {linkRight && (
+                <Link href={linkRight}>
                   <a className="text-primary-400 font-semibold">Ver todos</a>
                 </Link>
               )}
