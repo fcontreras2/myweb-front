@@ -9,5 +9,6 @@ export interface Post {
   content: string;
   image: StrapiImage;
   tags: StrapiPopulate<Tag>,
+  posts:  StrapiPopulate<Post>,
   seo: Meta
 }

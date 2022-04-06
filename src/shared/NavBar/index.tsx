@@ -20,7 +20,9 @@ const NavBar = React.memo(() => {
 
   return (
     <>
-      <div className="w-full fixed bg-white z-20 border-gray-100 border-b-2 ">
+      <div
+        className="w-full fixed bg-white z-20 border-gray-100 border-b-2"
+      >
         <header className="container relative flex items-center justify-between mx-auto">
           <div className="flex items-center h-16 justify-between w-1/2">
             <Link href={"/"}>
@@ -29,8 +31,8 @@ const NavBar = React.memo(() => {
                   <Image
                     src={navbar.logo}
                     alt="Logo"
-                    width={'110px'}
-                    height={'64px'}
+                    width={"110px"}
+                    height={"64px"}
                     layout="responsive"
                   />
                 </div>

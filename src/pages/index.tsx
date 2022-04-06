@@ -51,7 +51,12 @@ const Home: NextPage<Props> = ({ posts, projects }: Props) => {
 export async function getStaticProps() {
   // Run API calls in parallel
   const [posts, projects] = await Promise.all([
-    fetchAPI("/posts", { populate: { image: "*", tags: "*" } }),
+    fetchAPI("/posts", {
+      populate: { image: "*", tags: "*" },
+      pagination: {
+        pageSize: 5,
+      },
+    }),
     fetchAPI("/projects", {
       populate: { image: "*", tags: "*", icon: "*" },
       "filters[important][$eq]": true,
@@ -64,7 +69,7 @@ export async function getStaticProps() {
   return {
     props: {
       posts,
-      projects
+      projects,
     },
     revalidate: 1,
   };

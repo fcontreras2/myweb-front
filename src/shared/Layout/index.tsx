@@ -58,14 +58,14 @@ const Layout = ({
               <div className="lg:grid lg:grid-cols-16 lg:gap-x-10">
                 {left?.component}
               </div>
-              {pagination && <Pagination />}
+              {pagination && <Pagination {...(left?.pagination as any)}/>}
               {linkLeft && (
                 <Link href={linkLeft}>
                   <a className="text-primary-400 font-semibold">Ver todos</a>
                 </Link>
               )}
             </div>
-            <div className="col-span-16 lg:col-start-13 lg:col-span-6 h-[200px] sticky top-24">
+            <div className="col-span-16 lg:col-start-13 lg:col-span-6 md:h-[200px] md:sticky md:top-24">
               <h4 className="text-lg font-semibold border-b-2 w-32 border-b-primary-300">
                 {right?.title}
               </h4>

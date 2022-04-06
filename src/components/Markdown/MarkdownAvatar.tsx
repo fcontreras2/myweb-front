@@ -6,7 +6,7 @@ const MarkdownAvatar = (props: ReactMarkdownOptions) => {
     <ReactMarkdown
       components={{
         h1: ({children}) => (
-          <h1 className="font-poppins font-semibold text-gray-700 uppercase">{children}</h1>
+          <h1 className="font-poppins text-2xl font-semibold text-gray-700 uppercase">{children}</h1>
         ),
         strong: ({ children }: any) => (
           <span className="font-semibold text-primary-500">{children}</span>

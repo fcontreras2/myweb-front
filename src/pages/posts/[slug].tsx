@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { useContext } from "react";
 import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
-import ReactMarkdown from "react-markdown";
 import { fetchAPI } from "lib/api";
 import { StrapiData, StrapiPaginationData } from "interfaces/strapi";
 import remarkGfm from "remark-gfm";
@@ -45,7 +44,7 @@ const Post: NextPage<Props> = ({ post }: Props) => {
             avatar={avatar}
             createdAt={post.attributes.createdAt}
           />
-          <ContentRelatedPost {...post} />
+          <ContentRelatedPost {...post.attributes.posts} />
         </div>
       </Layout>
     </>
@@ -54,11 +53,24 @@ const Post: NextPage<Props> = ({ post }: Props) => {
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const { params } = context;
-
-  const posts: StrapiPaginationData<Post> = await fetchAPI(`/posts`, {
-    populate: "*",
-    "filters[slug][$eq]": `${(params as { slug: string }).slug}`,
-  });
+  const posts: StrapiPaginationData<Post> = await fetchAPI(
+    `/posts`,
+    {
+      populate: {
+        tags: "*",
+        image: "*",
+        posts: {
+          fields: ["slug", "title", "content"],
+          populate: "*",
+        },
+      },
+     
+      "filters[slug][$eq]": `${(params as { slug: string }).slug}`,
+    },
+    {
+      encodeValuesOnly: true,
+    }
+  );
 
   return {
     props: { post: posts.data[0] },

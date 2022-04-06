@@ -9,6 +9,10 @@ export interface StrapiData<T> {
   attributes: StrapiAtrributes & T;
 }
 
+export interface StrapiSimplePopulate<T>  {
+  data: StrapiData<T>;
+}
+
 export interface StrapiPopulate<T> {
   data: StrapiData<T>[];
 }
@@ -16,7 +20,7 @@ export interface StrapiPopulate<T> {
 export interface StrapiPagination {
   page: number;
   pageSize: number;
-  pageCounter: number;
+  pageCount: number;
   total: number;
 }
 

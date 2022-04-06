@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import type { NextPage } from "next";
+import type { GetServerSideProps, GetStaticProps, NextPage } from "next";
 import Meta from "components/Meta";
 import { fetchAPI } from "lib/api";
 import Layout from "shared/Layout";
@@ -9,15 +9,16 @@ import CardPost from "components/CardPost";
 import { Project } from "interfaces/project";
 import CardProject from "components/CardProject";
 import { GlobalContext } from "pages/_app";
+import { useRouter } from "next/router";
 
 type Props = {
   posts: StrapiPaginationData<Post>;
   projects: StrapiPaginationData<Project>;
 };
 
-const Posts: NextPage<Props> = ({ posts, projects }: Props) => {
+const Posts: NextPage<Props> = ({ projects, posts }: Props) => {
   const { seo } = useContext(GlobalContext);
-
+  console.log("posts", posts);
   return (
     <>
       <Meta {...seo} />
@@ -52,15 +53,25 @@ const Posts: NextPage<Props> = ({ posts, projects }: Props) => {
   );
 };
 
-export async function getStaticProps() {
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const { query } = ctx;
+  const { page } = query;
+
   // Run API calls in parallel
   const [posts, projects] = await Promise.all([
-    fetchAPI("/posts", {
-      populate: { image: "*", tags: "*" },
-      pagination: {
-        pageSize: 7,
+    fetchAPI(
+      "/posts",
+      {
+        populate: { image: "*", tags: "*" },
+        pagination: {
+          page: page || 1 ,
+          pageSize: 3
+        }
       },
-    }),
+      {
+        encodeValuesOnly: true,
+      }
+    ),
     fetchAPI("/projects", {
       populate: { image: "*", tags: "*", icon: "*" },
       "filters[important][$eq]": true,
@@ -74,8 +85,7 @@ export async function getStaticProps() {
     props: {
       posts,
       projects,
-    },
-    revalidate: 1,
+    }
   };
 }
 
