@@ -6,6 +6,7 @@ import { GlobalApp } from "interfaces/global";
 import dayjs from "dayjs";
 
 import "dayjs/locale/es";
+import { ModalProvider } from "components/Modal/context/ModalProvider";
 dayjs.locale("es");
 
 // Store Strapi Global object in context
@@ -14,7 +15,9 @@ export const GlobalContext = createContext({} as GlobalApp);
 function MyApp({ Component, pageProps }: AppProps<GlobalApp>) {
   return (
     <GlobalContext.Provider value={pageProps}>
-      <Component {...pageProps} />
+      <ModalProvider>
+        <Component {...pageProps} />
+      </ModalProvider>
     </GlobalContext.Provider>
   );
 }
@@ -32,8 +35,8 @@ MyApp.getInitialProps = async (ctx: any) => {
       },
       seo: {
         populate: "*",
-        metaSocial: ["image"]
-      }
+        metaSocial: ["image"],
+      },
     },
   });
   // Pass the data to our page via props

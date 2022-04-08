@@ -1,6 +1,19 @@
-import { ResumenCertificates } from "interfaces/resumen";
+import { ModalContext } from "components/Modal/context/ModalContext";
+import {
+  ResumenCertificateItem,
+  ResumenCertificates,
+} from "interfaces/resumen";
+import { useContext } from "react";
+import ModalCertificate from "./Modals/ModalCertificate";
 
-const ResumenCertificatesComponent = ({ resumen_section_certificates_list }: ResumenCertificates) => {
+const ResumenCertificatesComponent = ({
+  resumen_section_certificates_list,
+}: ResumenCertificates) => {
+  const { open } = useContext(ModalContext);
+
+  const handleOpen = (item: ResumenCertificateItem) => {
+    open({ ...ModalCertificate({ ...item }) });
+  };
   return (
     <>
       {resumen_section_certificates_list.map((item, index) => (
@@ -11,10 +24,13 @@ const ResumenCertificatesComponent = ({ resumen_section_certificates_list }: Res
               <p className="text-gray-500 text-sm">{item.platform}</p>
             </div>
             <p className="text-gray-500 text-xs">{item.dates}</p>
-            
-            <a className="text-primary-400 font-semibold text-xs">
+
+            <button
+              className="text-primary-400 font-semibold text-xs cursor-pointer outline-none focus:underline w-20 text-left"
+              onClick={() => handleOpen(item)}
+            >
               Ver detalle
-            </a>
+            </button>
           </div>
         </div>
       ))}

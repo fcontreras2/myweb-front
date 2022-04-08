@@ -11,7 +11,7 @@ type RangeNavigation = { min: number; max: number | null };
 
 const ResumenNavigation = ({ sections }: any) => {
   const [currentSection, setCurrentSection] = useState(0);
-  const [ranges, setRanges] = useState<RangeNavigation[]>([])
+  const [ranges, setRanges] = useState<RangeNavigation[]>([]);
 
   const handleClick = (event: MouseEvent<HTMLElement>) => {
     // event.preventDefault();
@@ -28,32 +28,33 @@ const ResumenNavigation = ({ sections }: any) => {
     }, 100);
   };
 
-  const checkRanges =  () => {
+  const checkRanges = () => {
+    const bodyRect: any = document.body.getBoundingClientRect();
+    const next: RangeNavigation[] = [{ min: 0, max: null }];
+    for (let index = 1; index <= sections.length; index++) {
+      const elementSection = document.getElementById(
+        "resumen-" + index
+      ) as HTMLElement;
+      const offset =
+        elementSection.getBoundingClientRect().top - bodyRect.top - 110;
+      next[index - 1].max = offset - 1;
+      next[index] = { min: 0, max: null };
+      next[index].min = offset;
+    }
 
-      const bodyRect: any = document.body.getBoundingClientRect();
-      const next: RangeNavigation[] = [{ min: 0, max: null }];
-      for (let index = 1; index <= sections.length; index++) {
-        const elementSection = (document.getElementById("resumen-" + index) as HTMLElement);
-        const offset = elementSection.getBoundingClientRect().top - bodyRect.top - 110;
-        next[index - 1].max = offset- 1;
-        next[index] = { min: 0, max: null };
-        next[index].min = offset;
-      }
-      
-      next[sections.length].max = document.documentElement.getBoundingClientRect().height;
-      
-      setRanges(next);
-    
-  }
+    next[sections.length].max =
+      document.documentElement.getBoundingClientRect().height;
+
+    setRanges(next);
+  };
 
   useEffect(() => {
-    
     const checkScroll = () => {
       const bodyRect: DOMRect = document.body.getBoundingClientRect();
-  
-      const navigationIndex: number = ranges.findIndex((range, index) => {      
+
+      const navigationIndex: number = ranges.findIndex((range, index) => {
         return (
-          Math.abs(bodyRect.top) >=  range.min - 50 &&
+          Math.abs(bodyRect.top) >= range.min - 50 &&
           Math.abs(bodyRect.top) < (range.max as number) - 50
         );
       });
@@ -65,14 +66,15 @@ const ResumenNavigation = ({ sections }: any) => {
   }, [ranges]);
 
   useEffect(() => {
-    checkRanges()
-  }, [sections])
+    checkRanges();
+  }, [sections]);
 
   return (
     <>
       <a
         href="#resumen-0"
-        className={`${
+        className={`outline-none focus:underline
+        ${
           currentSection === 0
             ? "border-l-4 border-l-primary-500 pl-4 text-primary-500"
             : "border-l-4 border-l-white pl-4"
@@ -85,7 +87,7 @@ const ResumenNavigation = ({ sections }: any) => {
           href={"#resumen-" + (index + 1)}
           onClick={handleClick}
           key={"#resumen-" + (index + 1)}
-          className={`${
+          className={`outline-none focus:underline ${
             currentSection === index + 1
               ? "border-l-4 border-l-primary-500 pl-4 text-primary-500"
               : "border-l-4 border-l-white pl-4"
@@ -94,9 +96,6 @@ const ResumenNavigation = ({ sections }: any) => {
           {section}
         </a>
       ))}
-      {/* <a href="#1" className="border-l-4 border-l-white pl-4">
-        Habilidades
-      </a> */}
     </>
   );
 };

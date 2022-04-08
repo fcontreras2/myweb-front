@@ -1,0 +1,65 @@
+@keyframes zoomIn {
+  0% {
+    transform:scale(0);
+  }
+  100% {
+    transform:scale(1);
+  }
+}
+
+@keyframes zoomOut {
+  0% {
+    transform:scale(1);
+  }
+  100% {
+    transform:scale(0);
+  }
+}
+
+.modal {
+  &__background {
+    z-index: 100;
+    @apply bg-gray-800 bg-opacity-25;
+    
+    &.--close {
+      .modal__container {
+        animation: zoomOut .4s;
+      }  
+    }
+    
+    
+    &.--open {
+      .modal__container {
+        animation: zoomIn .2s;
+      }
+    }
+  }
+
+  .close {
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    opacity: 0.3;
+  }
+  .close:hover {
+    opacity: 1;
+  }
+  .close:before, .close:after {
+    position: absolute;
+    left: 16px;
+    content: ' ';
+    height: 20px;
+    width: 2px;
+    top: 6px;
+    background-color: #333;
+  }
+  .close:before {
+    transform: rotate(45deg);
+  }
+  .close:after {
+    transform: rotate(-45deg);
+  }
+  
+}
+
+

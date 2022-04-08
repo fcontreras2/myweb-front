@@ -40,7 +40,7 @@ const NavBarLink = ({ url, name }: Props) => {
 
   return (
     <Link href={url}>
-      <a className={`font-normal ${className} hover:text-primary`}>{name}</a>
+      <a className={`font-normal outline-none focus:underline ${className} hover:text-primary`}>{name}</a>
     </Link>
   );
 };

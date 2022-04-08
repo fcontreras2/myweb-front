@@ -26,7 +26,7 @@ const NavBar = React.memo(() => {
         <header className="container relative flex items-center justify-between mx-auto">
           <div className="flex items-center h-16 justify-between w-1/2">
             <Link href={"/"}>
-              <a>
+              <a className="outline-none focus:underline">
                 <div className="relative w-[100px] h-[64px]">
                   <Image
                     src={navbar.logo}

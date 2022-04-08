@@ -13,13 +13,11 @@ import {
 import { Resumen, RESUMEN_TYPE } from "interfaces/resumen";
 import ResumenSectionComponent from "components/Resumen/ResumenSection";
 import ResumenCertificatesComponent from "components/Resumen/ResumenCertificates";
+import ResumenSkillComponent from "components/Resumen/ResumenSkill";
 
 type Props = {
   resumen: StrapiSimplePopulate<Resumen<any>>;
 };
-
-const Section = () => <p>Section</p>;
-const Certificates = () => <p>Certificates</p>;
 
 const ResumenContent = ({
   __component,
@@ -27,7 +25,6 @@ const ResumenContent = ({
 }: {
   __component: RESUMEN_TYPE;
 } & any) => {
-  console.log(__component);
   switch (__component) {
     case RESUMEN_TYPE.SECTION: {
       return <ResumenSectionComponent {...rest} />;
@@ -35,6 +32,10 @@ const ResumenContent = ({
 
     case RESUMEN_TYPE.CERTIFICATES: {
       return <ResumenCertificatesComponent {...rest} />;
+    }
+
+    case RESUMEN_TYPE.SKILLS: {
+      return <ResumenSkillComponent {...rest}/>
     }
 
     default:
@@ -56,11 +57,11 @@ const Resumen = ({ resumen }: Props) => {
         <NavBar />
         <GridWrapper>
           <div className="col-span-16 lg:col-start-1 lg:col-end-11">
-            <ResumenMain />
+            <ResumenMain {...resumen.data.attributes.resumen_main} />
             <div className="flex flex-col relative">
               {dynamics_components.map((component, index) => (
                 <div key={"section " + index}>
-                  <h4
+                    <h4
                     id={`resumen-` + (index + 1)}
                     className="text-2xl lg:text-3xl font-semibold border-b-2 mt-16 mb-6 w-40 border-b-primary-300 uppercase "
                   >
@@ -93,11 +94,16 @@ export async function getStaticProps() {
       "/my-resumen",
       {
         populate: {
+          resumen_main: {
+            populate: "*"
+          },
           dynamics_components: {
             populate: [
               "resumen_section_list",
               "resumen_section_list.image",
               "resumen_section_certificates_list",
+              "resumen_skills_list",
+              "resumen_skills_list.tags",
             ],
           },
         },
